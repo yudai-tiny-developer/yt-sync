@@ -1,0 +1,37 @@
+#yt-sync-container {
+	transform: translateY(-16px);
+	display: none;
+}
+
+div#movie_player[yt-sync-isLiveContent="true"]:not(.ad-showing) div.ytp-time-display:not(.ytp-live) #yt-sync-container {
+	display: inline-block;
+}
+
+#yt-sync-toggle {
+	margin-left: 8px;
+	padding: 2px 6px;
+	font-size: 10px;
+	cursor: pointer;
+}
+
+#yt-sync-toggle.SYNC_OFF {
+	background-color: #888888;
+}
+
+#yt-sync-toggle.SYNC_ON {
+	background-color: #88f888;
+}
+
+#yt-sync-toggle.SYNC_ON.SYNC_BASE {
+	background-color: #f88888;
+}
+
+#yt-sync-input {
+	width: 70px;
+	text-align: right;
+	display: none;
+}
+
+#yt-sync-container:has(.SYNC_ON) #yt-sync-input {
+	display: inline;
+}
