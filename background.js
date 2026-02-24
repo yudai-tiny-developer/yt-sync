@@ -53,7 +53,7 @@ setInterval(() => {
 			return;
 		}
 
-		activeTabsArray.map(tabId => tabId === baseTab || chrome.tabs.sendMessage(tabId, { type: "SYNC", time: r.time, paused: r.paused }).then(r => {
+		activeTabsArray.map(tabId => tabId === baseTab || chrome.tabs.sendMessage(tabId, { type: "SYNC", time: r.time, paused: r.paused, playbackRate: r.playbackRate }).then(r => {
 			if (!r) {
 				deactivate(tabId);
 				return;

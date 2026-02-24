@@ -71,7 +71,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 		const video = player.querySelector("video");
 		if (!video) return;
 
-		sendResponse({ time: Number(player.getAttribute("yt-sync-time")) + Number(input.value), paused: video.paused });
+		sendResponse({ time: Number(player.getAttribute("yt-sync-time")) + Number(input.value), paused: video.paused, playbackRate: video.playbackRate });
 		return true;
 	}
 
@@ -83,6 +83,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 			source: "yt-sync",
 			time: Number(msg.time) + Number(input.value),
 			paused: msg.paused,
+			playbackRate: msg.playbackRate,
 		});
 
 		sendResponse({});
