@@ -42,7 +42,6 @@
 		} else {
 			video.playbackRate = playbackRate;
 		}
-		console.log(video.playbackRate);
 
 		if (paused) {
 			player.pauseVideo();
