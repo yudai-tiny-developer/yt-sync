@@ -10,7 +10,7 @@
 		if (!startTimestampISOString) return { currentTime: null, currentIngestionTime: null };
 
 		const currentTime = player.getCurrentTime();
-		if (!currentTime) return { currentTime: null, currentIngestionTime: null };
+		if (!currentTime && currentTime !== 0) return { currentTime: null, currentIngestionTime: null };
 
 		const startTimestamp = Math.floor(new Date(startTimestampISOString).getTime() / 1000);
 		return { currentTime, currentIngestionTime: startTimestamp + currentTime };
@@ -26,7 +26,7 @@
 		if (!player) return;
 
 		const { currentTime, currentIngestionTime } = getCurrentIngestionTime(player);
-		if (!currentTime) return;
+		if (!currentTime && currentTime !== 0) return;
 		if (!currentIngestionTime) return;
 
 		const delta = time - currentIngestionTime;
@@ -44,8 +44,11 @@
 			player.pauseVideo();
 		} else {
 			const seekableEnd = player.getProgressState()?.seekableEnd;
-			if (seek < seekableEnd) {
+
+			if (0 <= seek && seek < seekableEnd) {
 				player.playVideo();
+			} else {
+				player.pauseVideo();
 			}
 		}
 	});
