@@ -19,32 +19,35 @@
 	window.addEventListener("message", event => {
 		if (event.data?.source !== "yt-sync") return;
 
-		const { time, paused } = event.data;
-		if (!time) return;
+		const { time, paused, playbackRate } = event.data;
 
 		const player = document.getElementById("movie_player");
 		if (!player) return;
 
+		const video = player.querySelector("video");
+		if (!video) return;
+
 		const { currentTime, currentIngestionTime } = getCurrentIngestionTime(player);
-		if (!currentTime && currentTime !== 0) return;
-		if (!currentIngestionTime) return;
 
 		const delta = time - currentIngestionTime;
 		const seek = currentTime + delta;
 
 		if (Math.abs(delta) > 1.0) {
 			player.seekTo(seek, true);
+			video.playbackRate = playbackRate;
 		} else if (delta > 0.2) {
-			player.setPlaybackRate(1.25);
+			video.playbackRate = playbackRate + 0.25;
+		} else if (delta < 0.2) {
+			video.playbackRate = playbackRate - 0.25;
 		} else {
-			player.setPlaybackRate(1);
+			video.playbackRate = playbackRate;
 		}
+		console.log(video.playbackRate);
 
 		if (paused) {
 			player.pauseVideo();
 		} else {
 			const seekableEnd = player.getProgressState()?.seekableEnd;
-
 			if (0 <= seek && seek < seekableEnd) {
 				player.playVideo();
 			} else {
