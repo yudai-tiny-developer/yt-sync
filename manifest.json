@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Synchronized Playback for YouTube Archived Live Streams",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "__MSG_appDesc__",
   "default_locale": "en",
   "icons": {
@@ -23,7 +23,7 @@
       "matches": [
         "https://www.youtube.com/*"
       ],
-      "run_at": "document_end"
+      "run_at": "document_start"
     }
   ],
   "web_accessible_resources": [
