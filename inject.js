@@ -3,10 +3,7 @@
 		const playerResponse = player.getPlayerResponse();
 		if (!playerResponse) return { currentTime: null, currentIngestionTime: null };
 
-		const isLiveNow = playerResponse.microformat?.playerMicroformatRenderer?.liveBroadcastDetails?.isLiveNow;
-		if (isLiveNow !== false) return { currentTime: null, currentIngestionTime: null }; // live
-
-		const startTimestampISOString = playerResponse.microformat?.playerMicroformatRenderer?.liveBroadcastDetails?.startTimestamp;
+		const startTimestampISOString = playerResponse.microformat?.playerMicroformatRenderer?.liveBroadcastDetails?.startTimestamp ?? playerResponse.microformat?.playerMicroformatRenderer?.publishDate;
 		if (!startTimestampISOString) return { currentTime: null, currentIngestionTime: null };
 
 		const currentTime = player.getCurrentTime();
@@ -101,6 +98,5 @@
 
 		player.setAttribute("yt-sync-time", currentIngestionTime);
 		player.setAttribute("yt-sync-state", player.getPlayerState());
-		player.setAttribute("yt-sync-isLiveContent", player.getPlayerResponse()?.videoDetails?.isLiveContent);
 	}, 100);
 })();

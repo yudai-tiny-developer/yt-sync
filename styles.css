@@ -3,7 +3,7 @@
 	display: none;
 }
 
-div#movie_player[yt-sync-isLiveContent="true"]:not(.ad-showing) div.ytp-time-display:not(.ytp-live) #yt-sync-container {
+div#movie_player:not(.ad-showing) div.ytp-time-display:not(.ytp-live) #yt-sync-container {
 	display: inline-block;
 }
 
