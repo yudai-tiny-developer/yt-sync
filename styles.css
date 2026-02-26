@@ -8,26 +8,31 @@ div#movie_player[yt-sync-isLiveContent="true"]:not(.ad-showing) div.ytp-time-dis
 }
 
 #yt-sync-toggle {
-	margin-left: 8px;
-	padding: 2px 6px;
-	font-size: 10px;
+	padding: 5px 15px;
+	border: none;
+	border-radius: 4px;
 	cursor: pointer;
+	color: #f8f8f8;
 }
 
 #yt-sync-toggle.SYNC_OFF {
-	background-color: #888888;
+	background-color: #484848;
 }
 
 #yt-sync-toggle.SYNC_ON {
-	background-color: #88f888;
+	background-color: #28a828;
 }
 
 #yt-sync-toggle.SYNC_ON.SYNC_BASE {
-	background-color: #f88888;
+	background-color: #c82828;
 }
 
 #yt-sync-input {
-	width: 70px;
+	width: 50px;
+	height: 25px;
+	background: #282828;
+	color: #f8f8f8;
+	border: 1px solid #282828;
 	text-align: right;
 	display: none;
 }
