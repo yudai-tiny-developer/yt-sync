@@ -55,7 +55,7 @@
 		const delta = time - currentIngestionTime;
 		const seek = currentTime + delta;
 		const seekableEnd = player.getProgressState()?.seekableEnd;
-		const isWithinSeekRange = 0 <= seek && seek < seekableEnd;
+		const isWithinSeekRange = 0 <= seek && seek <= seekableEnd;
 
 		if (isWithinSeekRange) {
 			warning.className = "";
@@ -67,6 +67,10 @@
 		if (Math.abs(delta) > 1.0) {
 			if (isWithinSeekRange) {
 				player.seekTo(seek, true);
+			} else if (seek < 0) {
+				player.seekTo(0, true);
+			} else if (seekableEnd < seek) {
+				player.seekTo(seekableEnd, true);
 			}
 			video.playbackRate = playbackRate;
 		} else if (delta > 0.2) {
