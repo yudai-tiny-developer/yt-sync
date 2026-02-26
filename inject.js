@@ -27,13 +27,26 @@
 		const video = player.querySelector("video");
 		if (!video) return;
 
+		const warning = document.getElementById("yt-sync-warning");
+		if (!warning) return;
+
 		const { currentTime, currentIngestionTime } = getCurrentIngestionTime(player);
 
 		const delta = time - currentIngestionTime;
 		const seek = currentTime + delta;
+		const seekableEnd = player.getProgressState()?.seekableEnd;
+		const isWithinSeekRange = 0 <= seek && seek < seekableEnd;
+
+		if (isWithinSeekRange) {
+			warning.className = "";
+		} else {
+			warning.className = "isOutsideSeekRange";
+		}
 
 		if (Math.abs(delta) > 1.0) {
-			player.seekTo(seek, true);
+			if (isWithinSeekRange) {
+				player.seekTo(seek, true);
+			}
 			video.playbackRate = playbackRate;
 		} else if (delta > 0.2) {
 			video.playbackRate = playbackRate + 0.25;
@@ -46,8 +59,7 @@
 		if (paused) {
 			player.pauseVideo();
 		} else {
-			const seekableEnd = player.getProgressState()?.seekableEnd;
-			if (0 <= seek && seek < seekableEnd) {
+			if (isWithinSeekRange) {
 				player.playVideo();
 			} else {
 				player.pauseVideo();
