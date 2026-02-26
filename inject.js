@@ -3,10 +3,7 @@
 		const playerResponse = player.getPlayerResponse();
 		if (!playerResponse) return { currentTime: null, currentIngestionTime: null };
 
-		const isLiveNow = playerResponse.microformat?.playerMicroformatRenderer?.liveBroadcastDetails?.isLiveNow;
-		if (isLiveNow !== false) return { currentTime: null, currentIngestionTime: null }; // live
-
-		const startTimestampISOString = playerResponse.microformat?.playerMicroformatRenderer?.liveBroadcastDetails?.startTimestamp;
+		const startTimestampISOString = playerResponse.microformat?.playerMicroformatRenderer?.liveBroadcastDetails?.startTimestamp ?? playerResponse.microformat?.playerMicroformatRenderer?.publishDate;
 		if (!startTimestampISOString) return { currentTime: null, currentIngestionTime: null };
 
 		const currentTime = player.getCurrentTime();
@@ -36,7 +33,7 @@
 	window.addEventListener("message", event => {
 		if (event.data?.source !== "yt-sync") return;
 
-		const { time, paused, playbackRate } = event.data;
+		const { time, paused, playbackRate, syncMode } = event.data;
 
 		const player = document.getElementById("movie_player");
 		if (!player) return;
@@ -52,7 +49,7 @@
 
 		const { currentTime, currentIngestionTime } = getCurrentIngestionTime(player);
 
-		const delta = time - currentIngestionTime;
+		const delta = time - (syncMode === "actual_time" ? currentIngestionTime : currentTime);
 		const seek = currentTime + delta;
 		const seekableEnd = player.getProgressState()?.seekableEnd;
 		const isWithinSeekRange = 0 <= seek && seek <= seekableEnd;
@@ -101,6 +98,5 @@
 
 		player.setAttribute("yt-sync-time", currentIngestionTime);
 		player.setAttribute("yt-sync-state", player.getPlayerState());
-		player.setAttribute("yt-sync-isLiveContent", player.getPlayerResponse()?.videoDetails?.isLiveContent);
 	}, 100);
 })();
