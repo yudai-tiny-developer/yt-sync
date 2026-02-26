@@ -50,8 +50,8 @@ div#movie_player[yt-sync-isLiveContent="true"]:not(.ad-showing) div.ytp-time-dis
 	text-align: center;
 	line-height: normal;
 	color: #f8f8f8;
-	background-color: #b82828;
-	opacity: 0.9;
+	background-color: #c82828;
+	opacity: 0.8;
 	border-radius: 8px;
 	position: absolute;
 	translate: -145px -75px;
@@ -60,4 +60,5 @@ div#movie_player[yt-sync-isLiveContent="true"]:not(.ad-showing) div.ytp-time-dis
 
 .ytp-time-display:has(#yt-sync-toggle.SYNC_ON) #yt-sync-warning.isOutsideSeekRange {
 	display: inline-flex;
+	flex-flow: column;
 }
