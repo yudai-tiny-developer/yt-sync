@@ -49,9 +49,9 @@
 			}
 			video.playbackRate = playbackRate;
 		} else if (delta > 0.2) {
-			video.playbackRate = playbackRate + 0.25;
-		} else if (delta < 0.2) {
-			video.playbackRate = playbackRate - 0.25;
+			video.playbackRate = playbackRate + 0.1;
+		} else if (delta < -0.2) {
+			video.playbackRate = playbackRate - 0.1;
 		} else {
 			video.playbackRate = playbackRate;
 		}
