@@ -16,6 +16,23 @@
 		return { currentTime, currentIngestionTime: startTimestamp + currentTime };
 	}
 
+	function format_time(seconds) {
+		const isNegative = seconds < 0;
+		const absSeconds = Math.abs(seconds);
+
+		const hs = Math.floor(absSeconds / 3600.0);
+		const ms = Math.floor((absSeconds % 3600) / 60.0);
+		const ss = Math.floor(absSeconds % 60);
+
+		const h = hs > 0 ? `${String(hs)}:` : '';
+		const m = String(ms).padStart(hs > 0 ? 2 : 1, '0');
+		const s = String(ss).padStart(2, '0');
+
+		const sign = isNegative ? '-' : '';
+
+		return `${sign}${h}${m}:${s}`;
+	}
+
 	window.addEventListener("message", event => {
 		if (event.data?.source !== "yt-sync") return;
 
@@ -30,22 +47,30 @@
 		const warning = document.getElementById("yt-sync-warning");
 		if (!warning) return;
 
+		const warningTime = document.getElementById("yt-sync-warning-time");
+		if (!warningTime) return;
+
 		const { currentTime, currentIngestionTime } = getCurrentIngestionTime(player);
 
 		const delta = time - currentIngestionTime;
 		const seek = currentTime + delta;
 		const seekableEnd = player.getProgressState()?.seekableEnd;
-		const isWithinSeekRange = 0 <= seek && seek < seekableEnd;
+		const isWithinSeekRange = 0 <= seek && seek <= seekableEnd;
 
 		if (isWithinSeekRange) {
 			warning.className = "";
 		} else {
 			warning.className = "isOutsideSeekRange";
+			warningTime.textContent = format_time(seek);
 		}
 
 		if (Math.abs(delta) > 1.0) {
 			if (isWithinSeekRange) {
 				player.seekTo(seek, true);
+			} else if (seek < 0) {
+				player.seekTo(0, true);
+			} else if (seekableEnd < seek) {
+				player.seekTo(seekableEnd, true);
 			}
 			video.playbackRate = playbackRate;
 		} else if (delta > 0.2) {

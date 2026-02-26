@@ -54,9 +54,19 @@ input.addEventListener('keydown', e => {
 	e.stopImmediatePropagation();
 });
 
+input.addEventListener('wheel', e => {
+	e.stopImmediatePropagation();
+});
+
 const warning = document.createElement("div");
 warning.id = "yt-sync-warning";
-warning.innerHTML = "The seek position is<br>OUT OF RANGE.";
+const warningMsg = document.createElement("div");
+warningMsg.id = "yt-sync-warning-msg";
+warningMsg.textContent = "OUT OF RANGE";
+const warningTime = document.createElement("div");
+warningTime.id = "yt-sync-warning-time";
+warning.appendChild(warningMsg);
+warning.appendChild(warningTime);
 
 const div = document.createElement("div");
 div.id = "yt-sync-container";
