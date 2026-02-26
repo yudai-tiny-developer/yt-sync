@@ -36,7 +36,7 @@
 	window.addEventListener("message", event => {
 		if (event.data?.source !== "yt-sync") return;
 
-		const { time, paused, playbackRate } = event.data;
+		const { time, paused, playbackRate, syncMode } = event.data;
 
 		const player = document.getElementById("movie_player");
 		if (!player) return;
@@ -52,7 +52,7 @@
 
 		const { currentTime, currentIngestionTime } = getCurrentIngestionTime(player);
 
-		const delta = time - currentIngestionTime;
+		const delta = time - (syncMode === "actual_time" ? currentIngestionTime : currentTime);
 		const seek = currentTime + delta;
 		const seekableEnd = player.getProgressState()?.seekableEnd;
 		const isWithinSeekRange = 0 <= seek && seek <= seekableEnd;
