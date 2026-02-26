@@ -165,6 +165,8 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 		button.classList.remove('SYNC_BASE');
 		button.textContent = "SYNC";
 
+		handleSelection(msg.syncMode);
+
 		window.postMessage({
 			source: "yt-sync",
 			time: Number(msg.time) + Number(input.value),
