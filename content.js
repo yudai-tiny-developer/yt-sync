@@ -54,6 +54,10 @@ input.addEventListener('keydown', e => {
 	e.stopImmediatePropagation();
 });
 
+input.addEventListener('wheel', e => {
+	e.stopImmediatePropagation();
+});
+
 const warning = document.createElement("div");
 warning.id = "yt-sync-warning";
 warning.innerHTML = "The seek position is<br>OUT OF RANGE.";
