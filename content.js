@@ -54,6 +54,10 @@ input.addEventListener('keydown', e => {
 	e.stopImmediatePropagation();
 });
 
+const warning = document.createElement("div");
+warning.id = "yt-sync-warning";
+warning.innerHTML = "The seek position is<br>OUT OF RANGE.";
+
 const div = document.createElement("div");
 div.id = "yt-sync-container";
 div.classList.add("ytp-autohide-fade-transition");
@@ -70,6 +74,8 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 
 		const video = player.querySelector("video");
 		if (!video) return;
+
+		warning.className = "";
 
 		sendResponse({ time: Number(player.getAttribute("yt-sync-time")) + Number(input.value), paused: video.paused, playbackRate: video.playbackRate });
 		return true;
@@ -106,6 +112,7 @@ function insertToggle() {
 	if (!container) return setTimeout(insertToggle, 1000);
 
 	container.appendChild(div);
+	container.appendChild(warning);
 }
 
 insertToggle();

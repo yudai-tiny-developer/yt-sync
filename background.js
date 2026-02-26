@@ -58,6 +58,10 @@ setInterval(() => {
 				deactivate(tabId);
 				return;
 			}
-		}).catch(() => { }));
-	}).catch(() => { });
+		}).catch(() => {
+			deactivate(tabId);
+		}));
+	}).catch(() => {
+		deactivate(baseTab);
+	});
 }, 200);

@@ -35,3 +35,24 @@ div#movie_player[yt-sync-isLiveContent="true"]:not(.ad-showing) div.ytp-time-dis
 #yt-sync-container:has(.SYNC_ON) #yt-sync-input {
 	display: inline;
 }
+
+#yt-sync-warning {
+	width: 180px;
+	height: 60px;
+	font-size: 16px;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	line-height: normal;
+	color: #f8f8f8;
+	background-color: #b82828;
+	opacity: 0.9;
+	border-radius: 8px;
+	position: absolute;
+	translate: -145px -75px;
+	display: none;
+}
+
+.ytp-time-display:has(#yt-sync-toggle.SYNC_ON) #yt-sync-warning.isOutsideSeekRange {
+	display: inline-flex;
+}
