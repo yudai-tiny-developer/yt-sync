@@ -30,9 +30,11 @@ div#movie_player:not(.ad-showing) div.ytp-time-display:not(.ytp-live) #yt-sync-c
 #yt-sync-input {
 	width: 50px;
 	height: 25px;
+	margin-left: 8px;
+	padding: 0;
 	background: #282828;
 	color: #f8f8f8;
-	border: 1px solid #282828;
+	border: none;
 	text-align: right;
 	display: none;
 }
@@ -72,7 +74,7 @@ div#movie_player:not(.ad-showing) div.ytp-time-display:not(.ytp-live) #yt-sync-c
 	background: none;
 	border: none;
 	cursor: pointer;
-	padding: 8px;
+	padding: 8px 12px 8px 12px;
 	border-radius: 50%;
 	transition: background-color 0.2s;
 	display: flex;
