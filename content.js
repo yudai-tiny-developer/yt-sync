@@ -12,23 +12,36 @@ button.classList.add("SYNC_OFF");
 button.textContent = "SYNC";
 
 function activate() {
-	button.classList.remove('SYNC_BASE');
-	button.classList.replace("SYNC_OFF", "SYNC_ON");
-	button.textContent = "SYNC";
-	chrome.runtime.sendMessage({ type: "ACTIVATE" });
+	chrome.runtime.sendMessage({ type: "ACTIVATE" }).then(() => {
+		button.classList.remove('SYNC_BASE');
+		button.classList.replace("SYNC_OFF", "SYNC_ON");
+		button.textContent = "SYNC";
+	});
 }
 
 function promote() {
-	button.classList.add('SYNC_BASE');
-	button.textContent = "BASE";
-	chrome.runtime.sendMessage({ type: "PROMOTE" });
+	chrome.runtime.sendMessage({ type: "PROMOTE" }).then(() => {
+		button.classList.add('SYNC_BASE');
+		button.textContent = "BASE";
+	});
 }
 
 function deactivate() {
-	button.classList.remove('SYNC_BASE');
-	button.classList.replace("SYNC_ON", "SYNC_OFF");
-	button.textContent = "SYNC";
-	chrome.runtime.sendMessage({ type: "DEACTIVATE" });
+	chrome.runtime.sendMessage({ type: "DEACTIVATE" }).then(() => {
+		button.classList.remove('SYNC_BASE');
+		button.classList.replace("SYNC_ON", "SYNC_OFF");
+		button.textContent = "SYNC";
+	});
+}
+
+function reset() {
+	chrome.runtime.sendMessage({ type: "DEACTIVATE" }).then(() => {
+		button.classList.remove('SYNC_BASE');
+		button.classList.replace("SYNC_ON", "SYNC_OFF");
+		button.textContent = "SYNC";
+		input.value = 0;
+		handleSelection("actual_time");
+	});
 }
 
 button.addEventListener('click', () => {
@@ -81,7 +94,6 @@ dropdownMenu.className = "dropdown-menu";
 
 const menu = document.createElement("div");
 menu.id = "yt-sync-menu";
-menu.classList.add("ytp-autohide-fade-transition");
 menu.appendChild(menuBtn);
 menu.appendChild(dropdownMenu);
 
@@ -135,7 +147,6 @@ window.addEventListener('click', () => {
 
 const div = document.createElement("div");
 div.id = "yt-sync-container";
-div.classList.add("ytp-autohide-fade-transition");
 div.appendChild(button);
 div.appendChild(input);
 
@@ -181,7 +192,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 });
 
 document.addEventListener('yt-navigate-start', () => {
-	deactivate();
+	reset();
 });
 
 function insertToggle() {
