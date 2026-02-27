@@ -24,23 +24,26 @@ function deactivate(tabId) {
 	}
 }
 
-chrome.runtime.onMessage.addListener((msg, sender) => {
+chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 	const tabId = sender.tab?.id;
 	if (!tabId) return;
 
 	if (msg.type === "ACTIVATE") {
 		activate(tabId);
-		return;
+		sendResponse({});
+		return true;
 	}
 
 	if (msg.type === "PROMOTE") {
 		promote(tabId);
-		return;
+		sendResponse({});
+		return true;
 	}
 
 	if (msg.type === "DEACTIVATE") {
 		deactivate(tabId);
-		return;
+		sendResponse({});
+		return true;
 	}
 });
 

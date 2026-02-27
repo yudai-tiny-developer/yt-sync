@@ -97,6 +97,5 @@
 		if (!currentIngestionTime) return;
 
 		player.setAttribute("yt-sync-time", currentIngestionTime);
-		player.setAttribute("yt-sync-state", player.getPlayerState());
 	}, 100);
 })();
