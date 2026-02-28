@@ -13,5 +13,8 @@
     },
     "timestamp": {
         "message": "動画のタイムスタンプで同期する"
+    },
+    "offset": {
+        "message": "同期位置調整（秒）"
     }
 }
