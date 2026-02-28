@@ -8,11 +8,17 @@ div#movie_player:not(.ad-showing) div.ytp-time-display:not(.ytp-live) #yt-sync-c
 }
 
 #yt-sync-toggle {
-	padding: 5px 15px;
+	padding: 5px;
 	border: none;
-	border-radius: 4px;
+	border-radius: 6px;
 	cursor: pointer;
 	color: #f8f8f8;
+	width: 60px;
+	transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+#yt-sync-toggle:hover {
+	box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.35);
 }
 
 #yt-sync-toggle.SYNC_OFF {
@@ -30,7 +36,7 @@ div#movie_player:not(.ad-showing) div.ytp-time-display:not(.ytp-live) #yt-sync-c
 #yt-sync-input {
 	width: 50px;
 	height: 25px;
-	margin-left: 8px;
+	margin-left: 6px;
 	padding: 0;
 	background: #282828;
 	color: #f8f8f8;
@@ -74,8 +80,9 @@ div#movie_player:not(.ad-showing) div.ytp-time-display:not(.ytp-live) #yt-sync-c
 	background: none;
 	border: none;
 	cursor: pointer;
-	padding: 8px 12px 8px 12px;
-	border-radius: 50%;
+	margin: 0 4px 0 4px;
+	padding: 8px;
+	border-radius: 40%;
 	transition: background-color 0.2s;
 	display: flex;
 	flex-direction: column;
@@ -96,6 +103,7 @@ div#movie_player:not(.ad-showing) div.ytp-time-display:not(.ytp-live) #yt-sync-c
 	height: 4px;
 	background-color: #f8f8f8;
 	border-radius: 50%;
+	box-shadow: 0 0 0 1px #484848
 }
 
 .dropdown-menu {
