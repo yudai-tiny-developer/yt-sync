@@ -7,5 +7,14 @@
     },
     "help2": {
         "message": "開いた動画ページの[SYNC]ボタンを押してください"
+    },
+    "actual_time": {
+        "message": "実際に配信された時刻で同期する"
+    },
+    "timestamp": {
+        "message": "動画のタイムスタンプで同期する"
+    },
+    "offset": {
+        "message": "同期位置調整（秒）"
     }
 }

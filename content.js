@@ -63,7 +63,7 @@ input.value = 0;
 input.min = -43200;
 input.max = 43200;
 input.step = 0.1;
-input.title = "n-sec offset";
+input.title = chrome.i18n.getMessage('offset');
 
 input.addEventListener('keydown', e => {
 	e.stopImmediatePropagation();
@@ -97,8 +97,8 @@ menu.appendChild(menuBtn);
 menu.appendChild(dropdownMenu);
 
 const menuOptions = [
-	{ id: 'actual_time', label: 'Sync with the actual broadcast time', selected: true },
-	{ id: 'timestamp', label: 'Sync with the video timestamp', selected: false },
+	{ id: 'actual_time', label: chrome.i18n.getMessage('actual_time'), selected: true },
+	{ id: 'timestamp', label: chrome.i18n.getMessage('timestamp'), selected: false },
 ];
 
 function renderMenu() {
