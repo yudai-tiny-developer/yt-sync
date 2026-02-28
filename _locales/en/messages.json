@@ -1,5 +1,11 @@
 {
     "appDesc": {
         "message": "An extension that synchronizes playback of YouTube livestream archives."
+    },
+    "help1": {
+        "message": "Open the video pages you want to synchronize,"
+    },
+    "help2": {
+        "message": "then press [SYNC] on each video page."
     }
 }

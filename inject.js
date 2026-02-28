@@ -44,6 +44,9 @@
 		const warning = document.getElementById("yt-sync-warning");
 		if (!warning) return;
 
+		const warningMsg = document.getElementById("yt-sync-warning-msg");
+		if (!warningMsg) return;
+
 		const warningTime = document.getElementById("yt-sync-warning-time");
 		if (!warningTime) return;
 
@@ -56,9 +59,12 @@
 
 		if (isWithinSeekRange) {
 			warning.className = "";
+			warningMsg.textContent = "";
+			warningTime.textContent = "";
 		} else {
-			warning.className = "isOutsideSeekRange";
+			warningMsg.textContent = "OUT OF RANGE";
 			warningTime.textContent = format_time(seek);
+			warning.className = "isOutsideSeekRange";
 		}
 
 		if (Math.abs(delta) > 1.0) {

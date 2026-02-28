@@ -75,7 +75,6 @@ input.addEventListener('wheel', e => {
 
 const warningMsg = document.createElement("span");
 warningMsg.id = "yt-sync-warning-msg";
-warningMsg.textContent = "OUT OF RANGE";
 
 const warningTime = document.createElement("span");
 warningTime.id = "yt-sync-warning-time";
@@ -161,7 +160,15 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 		const video = player.querySelector("video");
 		if (!video) return;
 
-		warning.className = "";
+		if (msg.tabs > 1) {
+			warning.className = "";
+			warningMsg.textContent = "";
+			warningTime.textContent = "";
+		} else {
+			warningMsg.textContent = chrome.i18n.getMessage('help1');
+			warningTime.textContent = chrome.i18n.getMessage('help2');
+			warning.className = "isOutsideSeekRange";
+		}
 
 		sendResponse({
 			time: (syncMode === "actual_time" ? Number(player.getAttribute("yt-sync-time")) : video.currentTime) + Number(input.value),
