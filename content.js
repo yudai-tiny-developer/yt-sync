@@ -97,8 +97,8 @@ menu.appendChild(menuBtn);
 menu.appendChild(dropdownMenu);
 
 const menuOptions = [
-	{ id: 'actual_time', label: 'Sync with the actual broadcast time', selected: true },
-	{ id: 'timestamp', label: 'Sync with the video timestamp', selected: false },
+	{ id: 'actual_time', label: chrome.i18n.getMessage('actual_time'), selected: true },
+	{ id: 'timestamp', label: chrome.i18n.getMessage('timestamp'), selected: false },
 ];
 
 function renderMenu() {

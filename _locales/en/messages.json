@@ -7,5 +7,11 @@
     },
     "help2": {
         "message": "then press [SYNC] on each video page."
+    },
+    "actual_time": {
+        "message": "Sync with the actual broadcast time"
+    },
+    "timestamp": {
+        "message": "Sync with the video timestamp"
     }
 }
