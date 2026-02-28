@@ -50,7 +50,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 setInterval(() => {
 	if (activeTabsArray.length < 1) return;
 
-	chrome.tabs.sendMessage(baseTab, { type: "BASE" }).then(r => {
+	chrome.tabs.sendMessage(baseTab, { type: "BASE", tabs: activeTabsArray.length }).then(r => {
 		if (!r) {
 			deactivate(baseTab);
 			return;
