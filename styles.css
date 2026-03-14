@@ -80,7 +80,7 @@ div#movie_player:not(.ad-showing) div.ytp-time-display:not(.ytp-live) #yt-sync-c
 	border: none;
 	cursor: pointer;
 	margin: 0 4px 0 4px;
-	padding: 1px 8px 1px 8px;
+	padding: 1px 12px 1px 12px;
 	border-radius: 40%;
 	transition: background-color 0.2s;
 	flex-direction: column;

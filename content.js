@@ -67,11 +67,15 @@ input.step = 0.1;
 input.title = chrome.i18n.getMessage('offset');
 
 input.addEventListener('keydown', e => {
-	e.stopImmediatePropagation();
+	e.stopPropagation();
 });
 
 input.addEventListener('wheel', e => {
-	e.stopImmediatePropagation();
+	e.stopPropagation();
+});
+
+input.addEventListener('click', e => {
+	e.stopPropagation();
 });
 
 const warningMsg = document.createElement("span");
