@@ -3,7 +3,7 @@
 	display: none;
 }
 
-div#movie_player:not(.ad-showing) div.ytp-time-display:not(.ytp-live) #yt-sync-container {
+div#movie_player:not(.ad-showing):not(.ytp-autohide) div.ytp-time-display:not(.ytp-live) #yt-sync-container {
 	display: inline-block;
 }
 
@@ -70,7 +70,7 @@ div#movie_player:not(.ad-showing) div.ytp-time-display:not(.ytp-live) #yt-sync-c
 	flex-flow: column;
 }
 
-.ytp-time-display:has(#yt-sync-toggle.SYNC_BASE) #yt-sync-menu {
+div#movie_player:not(.ytp-autohide) .ytp-time-display:has(#yt-sync-toggle.SYNC_BASE) #yt-sync-menu {
 	position: absolute;
 	display: inline-block;
 }
