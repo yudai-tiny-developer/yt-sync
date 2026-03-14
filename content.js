@@ -67,11 +67,15 @@ input.step = 0.1;
 input.title = chrome.i18n.getMessage('offset');
 
 input.addEventListener('keydown', e => {
-	e.stopImmediatePropagation();
+	e.stopPropagation();
 });
 
 input.addEventListener('wheel', e => {
-	e.stopImmediatePropagation();
+	e.stopPropagation();
+});
+
+input.addEventListener('click', e => {
+	e.stopPropagation();
 });
 
 const warningMsg = document.createElement("span");
@@ -146,6 +150,10 @@ div.id = "yt-sync-container";
 div.appendChild(button);
 div.appendChild(input);
 div.appendChild(menuBtn);
+
+div.addEventListener('click', e => {
+	e.stopPropagation();
+});
 
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 	if (msg.type === "BASE") {
