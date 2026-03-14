@@ -151,6 +151,10 @@ div.appendChild(button);
 div.appendChild(input);
 div.appendChild(menuBtn);
 
+div.addEventListener('click', e => {
+	e.stopPropagation();
+});
+
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 	if (msg.type === "BASE") {
 		button.classList.add('SYNC_BASE');
