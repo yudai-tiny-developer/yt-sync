@@ -44,7 +44,8 @@ function reset() {
 	});
 }
 
-button.addEventListener('click', () => {
+button.addEventListener('click', e => {
+	e.stopPropagation();
 	if (button.classList.contains("SYNC_OFF")) {
 		activate();
 	} else {
@@ -85,16 +86,11 @@ warning.appendChild(warningMsg);
 warning.appendChild(warningTime);
 
 const menuBtn = document.createElement("button");
-menuBtn.className = "kebab-btn";
+menuBtn.id = "kebab-btn";
 menuBtn.innerHTML = '<span class="dot"></span><span class="dot"></span><span class="dot"></span>';
 
 const dropdownMenu = document.createElement("div");
 dropdownMenu.className = "dropdown-menu";
-
-const menu = document.createElement("div");
-menu.id = "yt-sync-menu";
-menu.appendChild(menuBtn);
-menu.appendChild(dropdownMenu);
 
 const menuOptions = [
 	{ id: 'actual_time', label: chrome.i18n.getMessage('actual_time'), selected: true },
@@ -116,7 +112,8 @@ function renderMenu() {
                     <span>${option.label}</span>
                 `;
 
-		item.addEventListener('click', (e) => {
+		item.addEventListener('click', e => {
+			e.stopPropagation();
 			handleSelection(option.id);
 		});
 
@@ -135,7 +132,7 @@ function handleSelection(selectedId) {
 	syncMode = selectedId;
 }
 
-menuBtn.addEventListener('click', (e) => {
+menuBtn.addEventListener('click', e => {
 	e.stopPropagation();
 	dropdownMenu.classList.toggle('show');
 });
@@ -148,6 +145,7 @@ const div = document.createElement("div");
 div.id = "yt-sync-container";
 div.appendChild(button);
 div.appendChild(input);
+div.appendChild(menuBtn);
 
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 	if (msg.type === "BASE") {
@@ -209,14 +207,14 @@ function insertToggle() {
 	const video = player.querySelector("video");
 	if (!video) return setTimeout(insertToggle, 1000);
 
-	const container = player.querySelector(".ytp-time-display");
+	const container = player.querySelector(".ytp-time-display > .ytp-time-wrapper");
 	if (!container) return setTimeout(insertToggle, 1000);
 
 	renderMenu();
 
 	container.appendChild(div);
-	container.appendChild(warning);
-	container.appendChild(menu);
+	container.parentNode.appendChild(warning);
+	container.parentNode.appendChild(dropdownMenu);
 }
 
 insertToggle();
