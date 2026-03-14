@@ -1,10 +1,15 @@
+div#movie_player:not(.ad-showing) div.ytp-time-display:not(.ytp-live) > .ytp-time-wrapper {
+	display: inline-flex;
+}
+
 #yt-sync-container {
-	transform: translateY(-16px);
 	display: none;
+	margin-left: 16px;
 }
 
 div#movie_player:not(.ad-showing) div.ytp-time-display:not(.ytp-live) #yt-sync-container {
-	display: inline-block;
+	display: inline-flex;
+	align-items: center;
 }
 
 #yt-sync-toggle {
@@ -70,31 +75,31 @@ div#movie_player:not(.ad-showing) div.ytp-time-display:not(.ytp-live) #yt-sync-c
 	flex-flow: column;
 }
 
-.ytp-time-display:has(#yt-sync-toggle.SYNC_BASE) #yt-sync-menu {
-	position: absolute;
-	display: inline-block;
-}
-
-.kebab-btn {
+#kebab-btn {
 	background: none;
 	border: none;
 	cursor: pointer;
 	margin: 0 4px 0 4px;
-	padding: 8px;
+	padding: 1px 8px 1px 8px;
 	border-radius: 40%;
 	transition: background-color 0.2s;
-	display: flex;
 	flex-direction: column;
 	gap: 3px;
-	height: 40px;
+	width: 15px;
+	height: 25px;
 	justify-content: center;
 	align-items: center;
 	text-align: center;
 	line-height: normal;
+	display: none;
 }
 
-.kebab-btn:hover {
+#kebab-btn:hover {
 	background-color: #484848;
+}
+
+.ytp-time-display:has(#yt-sync-toggle.SYNC_BASE) #kebab-btn {
+	display: inline-flex;
 }
 
 .dot {
@@ -107,8 +112,7 @@ div#movie_player:not(.ad-showing) div.ytp-time-display:not(.ytp-live) #yt-sync-c
 
 .dropdown-menu {
 	position: absolute;
-	bottom: 55px;
-	left: -15px;
+	translate: 180px -140px;
 	margin-bottom: 8px;
 	background-color: #282828;
 	border: 1px solid #484848;
